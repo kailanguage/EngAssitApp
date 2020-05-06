@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_word">
+
+    <fragment
+        android:id="@+id/navigation_word"
+        android:name="com.kailang.engassit.ui.word.WordFragment"
+        android:label="@string/title_word"
+        tools:layout="@layout/fragment_word" />
+
+    <fragment
+        android:id="@+id/navigation_sentence"
+        android:name="com.kailang.engassit.ui.sentence.SentenceFragment"
+        android:label="@string/title_sentence"
+        tools:layout="@layout/fragment_sentence" />
+
+    <fragment
+        android:id="@+id/navigation_test"
+        android:name="com.kailang.engassit.ui.test.TestFragment"
+        android:label="@string/title_test"
+        tools:layout="@layout/fragment_test" />
+
+    <fragment
+        android:id="@+id/navigation_person"
+        android:name="com.kailang.engassit.ui.person.PersonFragment"
+        android:label="@string/title_person"
+        tools:layout="@layout/fragment_person" />
+</navigation>
