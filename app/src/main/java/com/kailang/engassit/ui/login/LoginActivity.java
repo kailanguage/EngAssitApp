@@ -19,18 +19,23 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kailang.engassit.MainActivity;
 import com.kailang.engassit.R;
 import com.kailang.engassit.data.ServerResponse;
-import com.kailang.engassit.data.entity.User;
-import com.kailang.engassit.utils.OkHttpCallback;
-import com.kailang.engassit.utils.OkHttpUtil;
+import com.kailang.engassit.data.Sync;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * 登录、注册
+ */
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mAccountView;
     private EditText mPasswordView;
+    private EditText mNameView;
     private ImageView mClearAccountView;
     private ImageView mClearPasswordView;
     private CheckBox mEyeView;
@@ -47,9 +53,12 @@ public class LoginActivity extends AppCompatActivity {
     private TextView mRegisterView;
     private LinearLayout mTermsLayout;
     private TextView mTermsView;
-    private RelativeLayout mPasswordLayout;
+    private RelativeLayout mPasswordLayout,mRegister;
 
     private List<View> mDropDownInvisibleViews;
+    private LoginViewModel loginViewModel;
+    private boolean isReg;
+    private Sync sync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,40 +70,49 @@ public class LoginActivity extends AppCompatActivity {
 
         mPasswordView.setLetterSpacing(0.2f);
 
+        loginViewModel=new ViewModelProvider(this).get(LoginViewModel.class);
+
+        loginViewModel.initAll();
+
+        loginViewModel.getIsRegSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                    mLoginView.setText("登 录");
+                    mRegisterView.setText("注册账号");
+                    mRegister.setVisibility(View.GONE);
+            }
+        });
+       sync = new Sync(this);
+        //登录或登录
         mLoginView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = mAccountView.getText().toString();
-                String password = mPasswordView.getText().toString();
+                Integer username = Integer.parseInt(mAccountView.getText().toString().trim());
+                String password = mPasswordView.getText().toString().trim();
 
-                OkHttpUtil.get("http://192.168.31.249:8080/user/login?userno=" + username + "&password=" + password,
-                        new OkHttpCallback() {
-                            @Override
-                            public void onFinish(boolean status, String msg) {
-                                super.onFinish(status, msg);
-                                if (status) {
-                                    //解析数据
-                                    Gson gson = new Gson();
-                                    ServerResponse<User> serverResponse = gson.fromJson(msg, new TypeToken<ServerResponse<User>>() {
-                                    }.getType());
-                                    int stat = serverResponse.getStatus();
-                                    if (stat == 0) {//登录成功
-                                        //保存用户信息
+                if(mLoginView.getText().equals("注 册")){
+                    String nicName=mNameView.getText().toString().trim();
+                   sync.register(username,password,nicName,loginViewModel);//注册
+                }else {
+                    sync.login(username,password,loginViewModel,true);//登录
+                }
+            }
+        });
 
-                                        //Activity跳转
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        LoginActivity.this.startActivity(intent);
-                                    } else {
-                                        Looper.prepare();
-                                        Toast.makeText(LoginActivity.this, serverResponse.getMsg(), Toast.LENGTH_LONG).show();
-                                        Looper.loop();
-                                    }
-
-                                }
-                            }
-                        });
-
-
+        //切换注册、登录
+        mRegisterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mRegisterView.getText().equals("注册账号")) {
+                    mPasswordView.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    mLoginView.setText("注 册");
+                    mRegisterView.setText("登录账号");
+                    mRegister.setVisibility(View.VISIBLE);
+                }else{
+                    mLoginView.setText("登 录");
+                    mRegisterView.setText("注册账号");
+                    mRegister.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -187,6 +205,7 @@ public class LoginActivity extends AppCompatActivity {
     private void findViewId() {
         mAccountView = findViewById(R.id.et_input_account);
         mPasswordView = findViewById(R.id.et_input_password);
+        mNameView = findViewById(R.id.et_input_name);
         mClearAccountView = findViewById(R.id.iv_clear_account);
         mClearPasswordView = findViewById(R.id.iv_clear_password);
         mEyeView = findViewById(R.id.iv_login_open_eye);
@@ -197,6 +216,7 @@ public class LoginActivity extends AppCompatActivity {
         mTermsLayout = findViewById(R.id.ll_terms_of_service_layout);
         mTermsView = findViewById(R.id.tv_terms_of_service);
         mPasswordLayout = findViewById(R.id.rl_password_layout);
+        mRegister=findViewById(R.id.layout_show_name);
     }
 
     private void initDropDownGroup() {
