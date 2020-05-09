@@ -3,29 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_word">
+    app:startDestination="@id/navigation_word">
 
     <fragment
         android:id="@+id/navigation_word"
         android:name="com.kailang.engassit.ui.word.WordFragment"
         android:label="@string/title_word"
-        tools:layout="@layout/fragment_word" />
+        tools:layout="@layout/fragment_word" >
+        <action
+            android:id="@+id/action_navigation_word_to_wordEditFragment"
+            app:destination="@id/wordEditFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_sentence"
         android:name="com.kailang.engassit.ui.sentence.SentenceFragment"
         android:label="@string/title_sentence"
-        tools:layout="@layout/fragment_sentence" />
+        tools:layout="@layout/fragment_sentence" >
+        <action
+            android:id="@+id/action_navigation_sentence_to_sentenceEditFragment"
+            app:destination="@id/sentenceEditFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_test"
         android:name="com.kailang.engassit.ui.test.TestFragment"
         android:label="@string/title_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_navigation_test_to_testGameFragment"
+            app:destination="@id/testGameFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_person"
         android:name="com.kailang.engassit.ui.person.PersonFragment"
         android:label="@string/title_person"
         tools:layout="@layout/fragment_person" />
+    <fragment
+        android:id="@+id/wordEditFragment"
+        android:name="com.kailang.engassit.ui.word.WordEditFragment"
+        android:label="编辑"
+        app:startDestination="@id/action_wordEditFragment_to_navigation_word">
+        <action
+            android:id="@+id/action_wordEditFragment_to_navigation_word"
+            app:destination="@id/navigation_word" />
+    </fragment>
+    <fragment
+        android:id="@+id/testGameFragment"
+        android:name="com.kailang.engassit.ui.test.TestGameFragment"
+        android:label="正在测试" >
+        <action
+            android:id="@+id/action_testGameFragment_to_navigation_test"
+            app:destination="@id/navigation_test" />
+    </fragment>
+    <fragment
+        android:id="@+id/sentenceEditFragment"
+        android:name="com.kailang.engassit.ui.sentence.SentenceEditFragment"
+        android:label="SentenceEditFragment" >
+        <action
+            android:id="@+id/action_sentenceEditFragment_to_navigation_sentence"
+            app:destination="@id/navigation_sentence" />
+    </fragment>
 </navigation>

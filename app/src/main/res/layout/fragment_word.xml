@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.word.WordFragment"
-    android:id="@+id/swipeRefreshLayout_word"
-    android:paddingTop="?attr/actionBarSize">
+    android:id="@+id/swipeRefreshLayout_word">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout_word"
