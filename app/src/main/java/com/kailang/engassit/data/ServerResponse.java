@@ -14,7 +14,6 @@ public class ServerResponse<T> {
     public ServerResponse(){}
 
 
-
     public int getStatus() {
         return status;
     }
