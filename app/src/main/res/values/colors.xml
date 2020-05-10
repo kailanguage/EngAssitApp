@@ -21,4 +21,8 @@
 
 
     <color name="warning">#E53935</color>
+
+    <color name="rightans">#00BCD4</color>
+    <color name="wrongans">#FF5722</color>
+
 </resources>

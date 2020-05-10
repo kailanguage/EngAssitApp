@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_navigation_sentence_to_sentenceEditFragment"
             app:destination="@id/sentenceEditFragment" />
+        <action
+            android:id="@+id/action_navigation_sentence_to_translateFragment"
+            app:destination="@id/translateFragment" />
     </fragment>
 
     <fragment
@@ -63,6 +66,15 @@
         android:label="SentenceEditFragment" >
         <action
             android:id="@+id/action_sentenceEditFragment_to_navigation_sentence"
+            app:destination="@id/navigation_sentence" />
+    </fragment>
+    <fragment
+        android:id="@+id/translateFragment"
+        android:name="com.kailang.engassit.ui.sentence.TranslateFragment"
+        android:label="fragment_translate"
+        tools:layout="@layout/fragment_translate" >
+        <action
+            android:id="@+id/action_translateFragment_to_navigation_sentence"
             app:destination="@id/navigation_sentence" />
     </fragment>
 </navigation>
