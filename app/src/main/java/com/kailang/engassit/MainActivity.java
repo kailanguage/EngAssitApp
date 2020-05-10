@@ -1,5 +1,6 @@
 package com.kailang.engassit;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.util.Log;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kailang.engassit.data.Sync;
 import com.kailang.engassit.data.entity.User;
+import com.kailang.engassit.ui.login.LoginActivity;
 import com.kailang.engassit.ui.login.LoginViewModel;
 import com.kailang.engassit.ui.person.PersonViewModel;
 
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                     sync.login(userno, password, loginViewModel, false);
                     Log.e("自动登录", userno + " " + password);
                 }
+            }else{
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
             }
         }
     }
