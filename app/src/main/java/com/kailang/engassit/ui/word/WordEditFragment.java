@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.kailang.engassit.R;
@@ -65,6 +66,7 @@ public class WordEditFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 wordViewModel.deleteWord(word);
+                Navigation.findNavController(v).navigateUp();
             }
         });
 
