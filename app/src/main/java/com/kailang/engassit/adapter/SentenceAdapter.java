@@ -31,7 +31,6 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
     }
 
     public void setAllWord(List<Sentence> allWasteBook) {
-        Log.e("xxx",allWasteBook.size()+" ");
         this.allWasteBook = allWasteBook;
     }
 
