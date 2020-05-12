@@ -22,6 +22,10 @@
 
 <img src=".\screenshots\sentence.png" width="150" height="300"> <img src="./screenshots/sentenceadd.png" width="150" height="300"> <img src="./screenshots/sentenceedit.png" width="150" height="300"> <img src="./screenshots/sentencesearch.png" width="150" height="300">
 
+**翻译模块**
+
+<img src=".\screenshots\translate.png" width="200" height="350">
+
 **测试模块**
 
 <img src="./screenshots/test.png" width="200" height="340"> <img src="./screenshots/testing.png" width="200" height="340">
