@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/create_word_dialog_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:minWidth="200dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingBottom="30dp"
+    android:paddingTop="30dp">
+    <TextView
+        android:id="@+id/word_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="添加新单词"
+        android:padding="5dp"
+        android:textSize="20sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/tv_addWord_en"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="英文"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/tv_addWord_cn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:hint="中文"
+        android:minHeight="45dp"
+        android:textSize="18sp" />
+    <RadioGroup
+        android:id="@+id/radioGroup_addWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="难道等级：">
+        </TextView>
+        <RadioButton
+            android:id="@+id/easy_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="简单"/>
+        <RadioButton
+            android:id ="@+id/common_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一般"/>
+        <RadioButton
+            android:id ="@+id/hard_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="困难"/>
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/bt_save_word"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="保存" />
+
+</LinearLayout>

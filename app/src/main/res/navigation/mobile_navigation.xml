@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/sentenceEditFragment"
         android:name="com.kailang.engassit.ui.sentence.SentenceEditFragment"
-        android:label="SentenceEditFragment" >
+        android:label="编辑" >
         <action
             android:id="@+id/action_sentenceEditFragment_to_navigation_sentence"
             app:destination="@id/navigation_sentence" />
@@ -71,7 +71,7 @@
     <fragment
         android:id="@+id/translateFragment"
         android:name="com.kailang.engassit.ui.sentence.TranslateFragment"
-        android:label="fragment_translate"
+        android:label="在线翻译"
         tools:layout="@layout/fragment_translate" >
         <action
             android:id="@+id/action_translateFragment_to_navigation_sentence"

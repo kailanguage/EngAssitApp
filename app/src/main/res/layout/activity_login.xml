@@ -228,7 +228,6 @@
             android:text="@string/login_terms_of_service"
             android:textColor="@drawable/bg_hypertext"
             style="@style/ClickableTextView"/>
-
     </LinearLayout>
 
 </RelativeLayout>
