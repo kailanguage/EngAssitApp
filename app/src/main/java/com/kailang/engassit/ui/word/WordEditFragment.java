@@ -13,19 +13,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.kailang.engassit.R;
+import com.kailang.engassit.data.entity.Sentence;
 import com.kailang.engassit.data.entity.Word;
+import com.kailang.engassit.ui.sentence.SentenceViewModel;
+
+import java.util.List;
 
 
 public class WordEditFragment extends Fragment {
-    private TextView tv_detail_userno, tv_detail_wno, tv_detail_cn, tv_detail_en, tv_detail_level;
+    private TextView tv_detail_userno, tv_detail_wno, tv_detail_cn, tv_detail_en, tv_detail_level,tv_detail_sentence;
     private Button bt_detail_delete, bt_detail_edit;
     private WordViewModel wordViewModel;
+    private SentenceViewModel sentenceViewModel;
     private Word word;
+    private List<Sentence> allSentences;
     private AddWordPopWin addWordPopWin;
 
     public WordEditFragment() {
@@ -44,6 +51,7 @@ public class WordEditFragment extends Fragment {
         tv_detail_level = root.findViewById(R.id.tv_detal_level);
         bt_detail_delete = root.findViewById(R.id.bt_detail_delete);
         bt_detail_edit = root.findViewById(R.id.bt_detail_edit);
+        tv_detail_sentence=root.findViewById(R.id.tv_detail_sentence);
         return root;
 
     }
@@ -52,6 +60,8 @@ public class WordEditFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
+        sentenceViewModel=new ViewModelProvider(this).get(SentenceViewModel.class);
+
         Gson gson = new Gson();
         String wordJson = getArguments().getString("EditWord");
         if (wordJson != null) {
@@ -61,7 +71,18 @@ public class WordEditFragment extends Fragment {
             tv_detail_en.setText(word.getEn());
             tv_detail_cn.setText(word.getCn());
             tv_detail_level.setText(word.getWlevel()+"");
+            sentenceViewModel.findWordWithPattern(word.getEn()).observe(getViewLifecycleOwner(), new Observer<List<Sentence>>() {
+                @Override
+                public void onChanged(List<Sentence> sentences) {
+                    StringBuilder stringBuilder=new StringBuilder();
+                    for(Sentence s:sentences)
+                        stringBuilder.append(s.getEn()+"\n"+s.getCn()+"\n");
+                    tv_detail_sentence.setText(stringBuilder);
+                }
+            });
+
         }
+
         bt_detail_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
