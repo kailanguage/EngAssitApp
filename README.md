@@ -16,7 +16,7 @@
 
 **单词模块**
 
-<img src=".\screenshots\word.png" width="150" height="300"> <img src=".\screenshots\wordadd.png" width="150" height="300"><img src=".\screenshots\wordedit.png" width="150" height="300"> <img src=".\screenshots\wordsearch.png" width="150" height="300">
+<img src=".\screenshots\word.png" width="150" height="300"> <img src=".\screenshots\wordadd.png" width="150" height="300"><img src=".\screenshots\wordedit1.png" width="150" height="300"> <img src=".\screenshots\wordsearch.png" width="150" height="300">
 
 **例句模块**
 
